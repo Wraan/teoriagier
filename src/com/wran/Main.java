@@ -3,24 +3,45 @@ package com.wran;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Main {
 
-    private static Stan znajdzStan(List<Stan> stany, int strG1, int strG2, int strG3){
+    private static Stan znajdzStan(Set<Stan> stany, int strG1, int strG2, int strG3){
         for(Stan s : stany){
             if(s.getStrG1() == strG1 && s.getStrG2() == strG2 && s.getStrG3() == strG3)
                 return s;
         }
         return null;
     }
+    private static Set<Stan> znajdzDlaStrG1IStrG2(Set<Stan> stany, int strG1, int strG2){
+        Set<Stan> output = new HashSet<>();
+        stany.forEach(stan->{
+            if(stan.getStrG1() == strG1 && stan.getStrG2() == strG2)
+                output.add(stan);
+        });
+        return output;
+    }
+    private static Set<Stan> znajdzDlaStrG1IStrG3(Set<Stan> stany, int strG1, int strG3){
+        Set<Stan> output = new HashSet<>();
+        stany.forEach(stan->{
+            if(stan.getStrG1() == strG1 && stan.getStrG3() == strG3)
+                output.add(stan);
+        });
+        return output;
+    }
+    private static Set<Stan> znajdzDlaStrG2IStrG2(Set<Stan> stany, int strG2, int strG3){
+        Set<Stan> output = new HashSet<>();
+        stany.forEach(stan->{
+            if(stan.getStrG2() == strG2 && stan.getStrG2() == strG2)
+                output.add(stan);
+        });
+        return output;
+    }
 
-    private static List<Stan> wczytajGre(String file){
-        List<Stan> stany = new ArrayList<>();
+    private static Set<Stan> wczytajGre(String file){
+        Set<Stan> stany = new HashSet<>();
         try (Stream<String> stream = Files.lines(Paths.get(file))) {
             stream.forEach((line)->{
                 List<String> parts = Arrays.asList(line.split(","));
@@ -37,9 +58,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        List<Stan> stany = wczytajGre(System.getProperty("user.dir") + "\\src\\com\\wran\\gra.txt");
+        Set<Stan> stany = wczytajGre(System.getProperty("user.dir") + "\\src\\com\\wran\\gra.txt");
         stany.forEach(stan -> System.out.println(stan.toString()));
 
-        System.out.println(Objects.requireNonNull(znajdzStan(stany, 2, 1, 2)).toString());
+
+
     }
 }
