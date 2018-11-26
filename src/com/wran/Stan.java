@@ -1,5 +1,9 @@
 package com.wran;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Stan {
 
     private int strG1;
@@ -72,5 +76,28 @@ public class Stan {
     @Override
     public String toString() {
         return "{" + strG1 + ", " + strG2 + ", " + strG3 + "} -> {" + wyplG1 + ", " + wyplG2 + ", " + wyplG3 + "}";
+    }
+
+    public static boolean porownajStany(Stan s1, Stan s2){
+        if(s1.getWyplG1() == s2.getWyplG1() && s1.getWyplG2() == s2.getWyplG2() && s1.getWyplG3() == s2.getWyplG3())
+            return true;
+        else
+            return false;
+    }
+
+    public static Stan znajdzStan(List<Stan> stany, int strG1, int strG2, int strG3){
+        for(Stan s : stany){
+            if(s.getStrG1() == strG1 && s.getStrG2() == strG2 && s.getStrG3() == strG3)
+                return s;
+        }
+        return null;
+    }
+    public static Set<Stan> znajdzStany(Set<Stan> stany, int strG1, int strG2, int strG3){
+        Set<Stan> output = new HashSet<>();
+        for(Stan s : stany){
+            if(s.getStrG1() == strG1 && s.getStrG2() == strG2 && s.getStrG3() == strG3)
+                output.add(s);
+        }
+        return output;
     }
 }
