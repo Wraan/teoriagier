@@ -9,5 +9,10 @@ public class Main {
         gra.wczytajGreZPliku(System.getProperty("user.dir") + "\\src\\com\\wran\\gra.txt");
         gra.drukujGre();
         System.out.println(gra.sprawdzGre());
+        gra.utworzGreIlorazowa();
+        for(int i = 0; i<gra.getKlasyAbstrakcji().size();i++){
+            System.out.println(gra.getKlasyAbstrakcji().get(i).toString());
+        }
+
         }
 }
