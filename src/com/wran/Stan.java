@@ -28,47 +28,36 @@ public class Stan {
     public int getStrG1() {
         return strG1;
     }
-
     public void setStrG1(int strG1) {
         this.strG1 = strG1;
     }
-
     public int getStrG2() {
         return strG2;
     }
-
     public void setStrG2(int strG2) {
         this.strG2 = strG2;
     }
-
     public int getStrG3() {
         return strG3;
     }
-
     public void setStrG3(int strG3) {
         this.strG3 = strG3;
     }
-
     public double getWyplG1() {
         return wyplG1;
     }
-
     public void setWyplG1(double wyplG1) {
         this.wyplG1 = wyplG1;
     }
-
     public double getWyplG2() {
         return wyplG2;
     }
-
     public void setWyplG2(double wyplG2) {
         this.wyplG2 = wyplG2;
     }
-
     public double getWyplG3() {
         return wyplG3;
     }
-
     public void setWyplG3(double wyplG3) {
         this.wyplG3 = wyplG3;
     }
@@ -76,6 +65,13 @@ public class Stan {
     @Override
     public String toString() {
         return "{" + strG1 + ", " + strG2 + ", " + strG3 + "} -> {" + wyplG1 + ", " + wyplG2 + ", " + wyplG3 + "}";
+    }
+
+    public boolean equals(Stan obj) {
+        if(strG1 == obj.strG1 && strG2 == obj.strG2 && strG3 == obj.strG3
+                &&  wyplG1 == obj.wyplG1 && wyplG1 == obj.wyplG1 && wyplG1 == obj.wyplG1)
+            return true;
+        return false;
     }
 
     public static boolean porownajStanyDoGryIlorazowej(Stan s1, Stan s2){
@@ -108,4 +104,7 @@ public class Stan {
         return null;
     }
 
+    public String drukujWyplaty(){
+        return "{" + wyplG1 + ", " + wyplG2 + ", " + wyplG3 + "}";
+    }
 }

@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 public class Gra {
     private Set<Stan> stany;
+    private Set<Stan> stanyGryIlorazowej = new HashSet<>();
     private List<KlasaAbstrakcji> klasyAbstrakcji;
     private List<StrategiaGracza> strategieGracza1 = new ArrayList<>();
     private List<StrategiaGracza> strategieGracza2 = new ArrayList<>();
@@ -122,7 +123,13 @@ public class Gra {
 
 
     public void drukujGre(){
-        stany.forEach(stan -> System.out.println(stan.toString()));
+        for(int i =1; i<=maxG1;i++){
+            for(int j = 1;j<=maxG2;j++){
+                for(int k =1;k<=maxG3;k++){
+                    System.out.println(Stan.znajdzStan(stany,i,j,k).toString());
+                }
+            }
+        }
     }
     public void wczytajGreZPliku(String file){
         Set<Stan> stany = new HashSet<>();
@@ -213,6 +220,17 @@ public class Gra {
     public void utworzGreIlorazowa(){
         obliczMaxNumerStrategii();
         porownajWszsytkieStrategieGraczaPierwszego();
+        porownajWszystkieStrategieGraczaDrugiego();
+        porownajWszystkieStrategieGraczaTrzeciego();
+        drukujGreIlorazowa();
+    }
+
+    public void drukujGreIlorazowa(){
+        //Drukowanie utworzonych klas abstrakcji
+        System.out.println("Gra ilorazowa:");
+        for (Stan s: stanyGryIlorazowej) {
+            System.out.println(s.toString());
+        }
     }
 
     //Mteody tworzące strategie
@@ -258,15 +276,19 @@ public class Gra {
 
     //Metody obsługujące gre ilorazową gracza pierwszego
     public void porownajWszsytkieStrategieGraczaPierwszego(){
-        boolean flaga;
-
         for(int i = 1; i<=maxG1;i++){
-            flaga = false;
             for(int j = i+1; j<=maxG1; j++){
                 if(porownajStrategieGraczaPierwszego(i,j)){
                     //Obie nie należą
                     if(!czyStrategiaJestWKlasieAbstrakcji(1,i) && !czyStrategiaJestWKlasieAbstrakcji(1,j)){
                         klasyAbstrakcji.add(new KlasaAbstrakcji(1,getStrategiaDanegoGracza(1,i).getStany(),i,j));
+                        for (Stan st:getStrategiaDanegoGracza(1,i).getStany()){
+                            if(!stanyGryIlorazowej.contains(st)){
+                                stanyGryIlorazowej.add(st);
+                            }
+
+                        }
+
                     }
                     //i należy do klasy
                     else if(czyStrategiaJestWKlasieAbstrakcji(1,i) && !czyStrategiaJestWKlasieAbstrakcji(1,j)){
@@ -299,6 +321,96 @@ public class Gra {
 
         return true;
     }
+
+
+    //Metody obsługujące gre ilorazową gracza drugiegio
+    public void porownajWszystkieStrategieGraczaDrugiego(){
+        for(int i = 1; i<=maxG2;i++){
+            for(int j = i+1; j<=maxG2; j++){
+                if(porownajStrategieGraczaDrugiego(i,j)){
+                    //Obie nie należą
+                    if(!czyStrategiaJestWKlasieAbstrakcji(2,i) && !czyStrategiaJestWKlasieAbstrakcji(2,j)){
+                        klasyAbstrakcji.add(new KlasaAbstrakcji(2,getStrategiaDanegoGracza(2,i).getStany(),i,j));
+                        for (Stan st:getStrategiaDanegoGracza(2,i).getStany()){
+                            if(!stanyGryIlorazowej.contains(st))
+                                stanyGryIlorazowej.add(st);
+                        }
+                    }
+                    //i należy do klasy
+                    else if(czyStrategiaJestWKlasieAbstrakcji(2,i) && !czyStrategiaJestWKlasieAbstrakcji(2,j)){
+                        getKlasaGraczaIStrategii(2,i).getNumeryStrategii().add(j);
+                    }
+                    //j należy do klasy
+                    else if(czyStrategiaJestWKlasieAbstrakcji(2,j) && !czyStrategiaJestWKlasieAbstrakcji(2,i)){
+                        getKlasaGraczaIStrategii(2,j).getNumeryStrategii().add(i);
+                    }
+
+                }
+            }
+            //Jeśli nie było podobnych strategii do strategii I
+            if(!czyStrategiaJestWKlasieAbstrakcji(2,i))
+                klasyAbstrakcji.add(new KlasaAbstrakcji(2,getStrategiaDanegoGracza(2,i).getStany(),i));
+        }
+    }
+    public boolean porownajStrategieGraczaDrugiego(int str1, int str2){
+        StrategiaGracza strat1 = getStrategiaDanegoGracza(2,str1);
+        StrategiaGracza strat2 = getStrategiaDanegoGracza(2,str2);
+
+        for(int i = 1; i <= maxG1;i++){
+            for(int j = 1; j <=maxG3;j++){
+                if(!Stan.porownajStanyDoGryIlorazowej(Stan.znajdzStan(strat1.getStany(),i,str1,j),
+                        Stan.znajdzStan(strat2.getStany(),i,str2,j))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //Metody obsługujące gre ilorazową gracza  trzeciego
+    public void porownajWszystkieStrategieGraczaTrzeciego(){
+        for(int i = 1; i<=maxG3;i++){
+            for(int j = i+1; j<=maxG3; j++){
+                if(porownajStrategieGraczaTrzeciego(i,j)){
+                    //Obie nie należą
+                    if(!czyStrategiaJestWKlasieAbstrakcji(3,i) && !czyStrategiaJestWKlasieAbstrakcji(3,j)){
+                        klasyAbstrakcji.add(new KlasaAbstrakcji(3,getStrategiaDanegoGracza(3,i).getStany(),i,j));
+                        for (Stan st:getStrategiaDanegoGracza(3,i).getStany()){
+                            if(!stanyGryIlorazowej.contains(st))
+                                stanyGryIlorazowej.add(st);
+                        }
+                    }
+                    //i należy do klasy
+                    else if(czyStrategiaJestWKlasieAbstrakcji(3,i) && !czyStrategiaJestWKlasieAbstrakcji(3,j)){
+                        getKlasaGraczaIStrategii(3,i).getNumeryStrategii().add(j);
+                    }
+                    //j należy do klasy
+                    else if(czyStrategiaJestWKlasieAbstrakcji(3,j) && !czyStrategiaJestWKlasieAbstrakcji(32,i)){
+                        getKlasaGraczaIStrategii(3,j).getNumeryStrategii().add(i);
+                    }
+
+                }
+            }
+            //Jeśli nie było podobnych strategii do strategii I
+            if(!czyStrategiaJestWKlasieAbstrakcji(3,i))
+                klasyAbstrakcji.add(new KlasaAbstrakcji(3,getStrategiaDanegoGracza(3,i).getStany(),i));
+        }
+    }
+    public boolean porownajStrategieGraczaTrzeciego(int str1, int str2){
+        StrategiaGracza strat1 = getStrategiaDanegoGracza(3,str1);
+        StrategiaGracza strat2 = getStrategiaDanegoGracza(3,str2);
+
+        for(int i = 1; i <= maxG1;i++){
+            for(int j = 1; j <=maxG2;j++){
+                if(!Stan.porownajStanyDoGryIlorazowej(Stan.znajdzStan(strat1.getStany(),i,j,str1),
+                        Stan.znajdzStan(strat2.getStany(),i,j,str2))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean czyStrategiaJestWKlasieAbstrakcji(int numerGracza, int numerStrategii){
         for (KlasaAbstrakcji ka: klasyAbstrakcji) {
             if(ka.numerGracza == numerGracza){
@@ -310,7 +422,5 @@ public class Gra {
         }
         return false;
     }
-
-    //Todo: Metody dla gracza 2 i 3
 }
 
