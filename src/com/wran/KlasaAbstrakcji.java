@@ -12,14 +12,12 @@ public class KlasaAbstrakcji {
     public KlasaAbstrakcji() {
         numeryStrategii = new ArrayList<>();
     }
-
     public KlasaAbstrakcji(int numerGracza, Set<Stan> stany,int str1, int str2) {
         this.numerGracza = numerGracza;
         this.stany = stany;
         this.numeryStrategii.add(str1);
         this.numeryStrategii.add(str2);
     }
-
     public KlasaAbstrakcji(int numerGracza, Set<Stan> stany,int str1) {
         this.numerGracza = numerGracza;
         this.stany = stany;
@@ -29,23 +27,18 @@ public class KlasaAbstrakcji {
     public int getNumerGracza() {
         return numerGracza;
     }
-
     public void setNumerGracza(int numerGracza) {
         this.numerGracza = numerGracza;
     }
-
     public List<Integer> getNumeryStrategii() {
         return numeryStrategii;
     }
-
     public void setNumeryStrategii(List<Integer> numeryStrategii) {
         this.numeryStrategii = numeryStrategii;
     }
-
     public Set<Stan> getStany() {
         return stany;
     }
-
     public void setStany(Set<Stan> stany) {
         this.stany = stany;
     }
@@ -58,10 +51,10 @@ public class KlasaAbstrakcji {
         for (int i: numeryStrategii) {
             numeryStrat += Integer.toString(i) + ",";
         }
-        for (Stan s: stany) {
-            stanString += s.toString();
-        }
+//        for (Stan s: stany) {
+//            stanString += s.drukujWyplaty();
+//        }
 
-        return "Gracz: "+ nrGracza + " Strategie: " + numeryStrat+ " Stany: " + stanString;
+        return "Gracz: "+ nrGracza + " Strategie: " + numeryStrat; //+ " Stany: " + stanString;
     }
 }

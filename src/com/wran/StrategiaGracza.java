@@ -11,7 +11,6 @@ public class StrategiaGracza {
 
     public StrategiaGracza() {
     }
-
     public StrategiaGracza(Set<Stan> stany, int numerGracza, int numerStrategii) {
         this.stany = stany;
         this.numerGracza = numerGracza;
@@ -21,23 +20,18 @@ public class StrategiaGracza {
     public int getNumerGracza() {
         return numerGracza;
     }
-
     public void setNumerGracza(int numerGracza) {
         this.numerGracza = numerGracza;
     }
-
     public int getNumerStrategii() {
         return numerStrategii;
     }
-
     public void setNumerStrategii(int numerStrategii) {
         this.numerStrategii = numerStrategii;
     }
-
     public Set<Stan> getStany() {
         return stany;
     }
-
     public void setStany(Set<Stan> stany) {
         this.stany = stany;
     }
