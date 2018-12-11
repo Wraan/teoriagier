@@ -26,12 +26,10 @@ public class Gra {
         klasyAbstrakcji = new ArrayList<>();
         stopienDrozwiazania = 1;
     }
-
     public Gra(Set<Stan> stany, List<KlasaAbstrakcji> klasyAbstrakcji, int stopienDrozwiazania) {
         this.stany = stany;
         this.klasyAbstrakcji = klasyAbstrakcji;
         this.stopienDrozwiazania = stopienDrozwiazania;
-        //Todo: metodka z maxami
     }
 
 
@@ -278,6 +276,9 @@ public class Gra {
     /*Metody obsługujące gry ilorazowe*/
     public void utworzGreIlorazowa(){
         obliczMaxNumerStrategii();
+        System.out.println("Gra początkowa");
+        drukujGre();
+        System.out.println("\n\n");
         porownajWszsytkieStrategieGraczaPierwszego();
         porownajWszystkieStrategieGraczaDrugiego();
         porownajWszystkieStrategieGraczaTrzeciego();
@@ -506,8 +507,6 @@ public class Gra {
         if(czyStrategieGraczaPierwszegoSaRownowazne() && czyStrategieGraczaDrugiegoSaRownowazne() && czyStrategieGraczaTrzeciegoSaRownowazne())
             System.out.println("Gra jest d-rozwiązalna " + stopienDrozwiazania + " stopnia");
     }
-
-
     public int mpeszKrok(){
         //Jeżeli pojawi się strategia zdominowana wartość się zwiększy co spowoduje kolejne wykonanie się mPesz
         int liczbaZdominowanychStrategii = 0;
@@ -687,7 +686,6 @@ public class Gra {
         }
         return false;
     }
-
 
     public boolean czyStrategieGraczaPierwszegoSaRownowazne(){
         if(strategieGracza1.size() == 1)
