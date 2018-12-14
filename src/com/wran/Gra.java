@@ -97,7 +97,7 @@ public class Gra {
             return  maxG3;
 
     }
-    public StrategiaGracza getStrategiaDanegoGracza(int numerGracza, int numerStrategi) {
+    private StrategiaGracza getStrategiaDanegoGracza(int numerGracza, int numerStrategi) {
         if(numerGracza == 1){
             for (StrategiaGracza str1: strategieGracza1){
                 if(str1.getNumerStrategii() == numerStrategi)
@@ -118,7 +118,7 @@ public class Gra {
         }
         return null;
     }
-    public KlasaAbstrakcji getKlasaGraczaIStrategii(int numerGracza, int numerStrategii){
+    private KlasaAbstrakcji getKlasaGraczaIStrategii(int numerGracza, int numerStrategii){
         for (KlasaAbstrakcji ka: klasyAbstrakcji) {
             if(ka.numerGracza == numerGracza)
                 for (int nrStr: ka.getNumeryStrategii()) {
@@ -230,7 +230,7 @@ public class Gra {
         return true;
     }
     //Mteody tworzące strategie
-    public Set<Stan> znajdzStanyDlaDanejStrategiiGraczaPierwszego(int numerStrategii){
+    private Set<Stan> znajdzStanyDlaDanejStrategiiGraczaPierwszego(int numerStrategii){
         Set<Stan> stanyTymczasowe = new HashSet<>();
         for(int i = 1;i<=maxG2;i++){
             for(int j = 1; j<=maxG3 ; j++){
@@ -239,7 +239,7 @@ public class Gra {
         }
         return stanyTymczasowe;
     }
-    public Set<Stan> znajdzStanyDlaDanejStrategiiGraczaDrugiego(int numerStrategii){
+    private Set<Stan> znajdzStanyDlaDanejStrategiiGraczaDrugiego(int numerStrategii){
         Set<Stan> stanyTymczasowe = new HashSet<>();
         for(int i= 1;i<=maxG1;i++){
             for(int j = 1; j<=maxG3 ; j++){
@@ -248,7 +248,7 @@ public class Gra {
         }
         return stanyTymczasowe;
     }
-    public Set<Stan> znajdzStanyDlaDanejStrategiiGraczaTrzeciego(int numerStrategii){
+    private Set<Stan> znajdzStanyDlaDanejStrategiiGraczaTrzeciego(int numerStrategii){
         Set<Stan> stanyTymczasowe = new HashSet<>();
         for(int i= 1;i<=maxG1;i++){
             for(int j = 1; j<=maxG2 ; j++){
@@ -275,6 +275,7 @@ public class Gra {
 
     /*Metody obsługujące gry ilorazowe*/
     public void utworzGreIlorazowa(){
+        System.out.println("Tworzenie gry ilorazowej");
         obliczMaxNumerStrategii();
         System.out.println("Gra początkowa");
         drukujGre();
@@ -284,7 +285,7 @@ public class Gra {
         porownajWszystkieStrategieGraczaTrzeciego();
         drukujGreIlorazowa();
     }
-    public void drukujGreIlorazowa(){
+    private void drukujGreIlorazowa(){
         //Drukowanie utworzonych klas abstrakcji
         System.out.println("Gra ilorazowa:");
         for (Stan s: stanyGryIlorazowej) {
@@ -293,7 +294,7 @@ public class Gra {
     }
 
     //Metody obsługujące gre ilorazową gracza pierwszego
-    public void porownajWszsytkieStrategieGraczaPierwszego(){
+    private void porownajWszsytkieStrategieGraczaPierwszego(){
         for(int i = 1; i<=maxG1;i++){
             for(int j = i+1; j<=maxG1; j++){
                 if(porownajStrategieGraczaPierwszego(i,j)){
@@ -331,7 +332,7 @@ public class Gra {
 
         }
     }
-    public boolean porownajStrategieGraczaPierwszego(int str1, int str2){
+    private boolean porownajStrategieGraczaPierwszego(int str1, int str2){
         StrategiaGracza strat1 = getStrategiaDanegoGracza(1,str1);
         StrategiaGracza strat2 = getStrategiaDanegoGracza(1,str2);
 
@@ -348,7 +349,7 @@ public class Gra {
     }
 
     //Metody obsługujące gre ilorazową gracza drugiegio
-    public void porownajWszystkieStrategieGraczaDrugiego(){
+    private void porownajWszystkieStrategieGraczaDrugiego(){
         for(int i = 1; i<=maxG2;i++){
             for(int j = i+1; j<=maxG2; j++){
                 if(porownajStrategieGraczaDrugiego(i,j)){
@@ -386,7 +387,7 @@ public class Gra {
 
         }
     }
-    public boolean porownajStrategieGraczaDrugiego(int str1, int str2){
+    private boolean porownajStrategieGraczaDrugiego(int str1, int str2){
         StrategiaGracza strat1 = getStrategiaDanegoGracza(2,str1);
         StrategiaGracza strat2 = getStrategiaDanegoGracza(2,str2);
 
@@ -402,7 +403,7 @@ public class Gra {
     }
 
     //Metody obsługujące gre ilorazową gracza  trzeciego
-    public void porownajWszystkieStrategieGraczaTrzeciego(){
+    private void porownajWszystkieStrategieGraczaTrzeciego(){
         for(int i = 1; i<=maxG3;i++){
             for(int j = i+1; j<=maxG3; j++){
                 if(porownajStrategieGraczaTrzeciego(i,j)){
@@ -438,7 +439,7 @@ public class Gra {
 
         }
     }
-    public boolean porownajStrategieGraczaTrzeciego(int str1, int str2){
+    private boolean porownajStrategieGraczaTrzeciego(int str1, int str2){
         StrategiaGracza strat1 = getStrategiaDanegoGracza(3,str1);
         StrategiaGracza strat2 = getStrategiaDanegoGracza(3,str2);
 
@@ -452,8 +453,7 @@ public class Gra {
         }
         return true;
     }
-
-    public boolean czyStrategiaJestWKlasieAbstrakcji(int numerGracza, int numerStrategii){
+    private boolean czyStrategiaJestWKlasieAbstrakcji(int numerGracza, int numerStrategii){
         for (KlasaAbstrakcji ka: klasyAbstrakcji) {
             if(ka.numerGracza == numerGracza){
                 for (int nr: ka.numeryStrategii) {
@@ -464,14 +464,14 @@ public class Gra {
         }
         return false;
     }
-    public boolean czyGraIlorazowaZawieraStan(Stan stan){
+    private boolean czyGraIlorazowaZawieraStan(Stan stan){
         for (Stan stanGryIlo: stanyGryIlorazowej) {
             if(stan.equals(stanGryIlo))
                 return true;
         }
         return false;
     }
-    public void dodajNazweKlasy(Set<Stan> setStrategii, int numerGracza, int numerStrategii){
+    private void dodajNazweKlasy(Set<Stan> setStrategii, int numerGracza, int numerStrategii){
         for (Stan stanGryIlo: stanyGryIlorazowej){
             for(Stan stanStrat: setStrategii){
                 if(stanStrat.equals(stanGryIlo) && numerGracza == 2){
@@ -492,6 +492,7 @@ public class Gra {
     /*Metody obsługujące MPESZ*/
 
     public void mPesz(){
+        System.out.println("MPESZ");
         boolean czyStrategieSaNieporownywalne = false;
         int kroki = 1;
         //Jeśli liczba zdominowanych strategii będzie równa 0 zakończ mpesz
@@ -507,7 +508,7 @@ public class Gra {
         if(czyStrategieGraczaPierwszegoSaRownowazne() && czyStrategieGraczaDrugiegoSaRownowazne() && czyStrategieGraczaTrzeciegoSaRownowazne())
             System.out.println("Gra jest d-rozwiązalna " + stopienDrozwiazania + " stopnia");
     }
-    public int mpeszKrok(){
+    private int mpeszKrok(){
         //Jeżeli pojawi się strategia zdominowana wartość się zwiększy co spowoduje kolejne wykonanie się mPesz
         int liczbaZdominowanychStrategii = 0;
 
@@ -563,7 +564,7 @@ public class Gra {
             for(int i : zdominowaneStrategieGracza2)
             {
                 List<Stan> stanyDoUsuniecia = new ArrayList<>();
-                strategieGracza1.remove(getStrategiaDanegoGracza(2,i));
+                strategieGracza2.remove(getStrategiaDanegoGracza(2,i));
                 for(Stan s : stany){
                     if(s.getStrG2() == i)
                         stanyDoUsuniecia.add(s);
@@ -597,7 +598,7 @@ public class Gra {
 
 
     //Eliminacja strategii dominowanych, funkcja zwraca true gdy dana strategia gracza 1 jest zdominowana
-    public boolean czyStrategiaGraczaPierwszegoJestZdominowana(int numerStrategii){
+    private boolean czyStrategiaGraczaPierwszegoJestZdominowana(int numerStrategii){
         int zdomin;
         int takieSame;
         for(int i = 0 ; i < strategieGracza1.size(); i++){
@@ -627,7 +628,7 @@ public class Gra {
         return false;
     }
     //Eliminacja strategii dominowanych, funkcja zwraca true gdy dana strategia gracza 2 jest zdominowana
-    public boolean czyStrategiaGraczaDrugiegoJestZdominowana(int numerStrategii){
+    private boolean czyStrategiaGraczaDrugiegoJestZdominowana(int numerStrategii){
         int zdomin;
         int takieSame;
         for(int i = 0 ; i < strategieGracza2.size(); i++){
@@ -657,7 +658,7 @@ public class Gra {
         return false;
     }
     //Eliminacja strategii dominowanych, funkcja zwraca true gdy dana strategia gracza 3 jest zdominowana
-    public boolean czyStrategiaGraczaTrzeciegoJestZdominowana(int numerStrategii){
+    private boolean czyStrategiaGraczaTrzeciegoJestZdominowana(int numerStrategii){
         int zdomin;
         int takieSame;
         for(int i = 0 ; i < strategieGracza3.size(); i++){
@@ -687,7 +688,7 @@ public class Gra {
         return false;
     }
 
-    public boolean czyStrategieGraczaPierwszegoSaRownowazne(){
+    private boolean czyStrategieGraczaPierwszegoSaRownowazne(){
         if(strategieGracza1.size() == 1)
             return true;
         for(int i = 1 ; i < strategieGracza1.size(); i++){
@@ -708,7 +709,7 @@ public class Gra {
         }
         return true;
     }
-    public boolean czyStrategieGraczaDrugiegoSaRownowazne(){
+    private boolean czyStrategieGraczaDrugiegoSaRownowazne(){
         if(strategieGracza2.size() == 1)
             return true;
         for(int i = 1 ; i < strategieGracza2.size(); i++){
@@ -729,7 +730,7 @@ public class Gra {
         }
         return true;
     }
-    public boolean czyStrategieGraczaTrzeciegoSaRownowazne(){
+    private boolean czyStrategieGraczaTrzeciegoSaRownowazne(){
         if(strategieGracza3.size() == 1)
             return true;
         for(int i = 1 ; i < strategieGracza3.size(); i++){
