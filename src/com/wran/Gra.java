@@ -143,7 +143,7 @@ public class Gra {
         }
     }
     public void wczytajGreZPliku(String file){
-        Set<Stan> stany = new HashSet<>();
+        Set<Stan> output = new HashSet<>();
         try (Stream<String> stream = Files.lines(Paths.get(file))) {
             stream.forEach((line)->{
                 List<String> parts = Arrays.asList(line.split(","));
@@ -151,12 +151,12 @@ public class Gra {
                 Stan stan = new Stan(Integer.parseInt(parts.get(0)), Integer.parseInt(parts.get(1)),
                         Integer.parseInt(parts.get(2)), Double.parseDouble(parts.get(3)),
                         Double.parseDouble(parts.get(4)), Double.parseDouble(parts.get(5)));
-                stany.add(stan);
+                output.add(stan);
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.stany = stany;
+        this.stany = output;
         obliczMaxNumerStrategii();
         utworzStrategieGraczy();
     }
