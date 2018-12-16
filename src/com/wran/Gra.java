@@ -2,6 +2,7 @@ package com.wran;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
@@ -154,7 +155,6 @@ public class Gra {
                 output.add(stan);
             });
         } catch (IOException e) {
-            e.printStackTrace();
         }
         this.stany = output;
         obliczMaxNumerStrategii();
@@ -286,6 +286,10 @@ public class Gra {
         System.out.println("Gra ilorazowa:");
         for (Stan s: stanyGryIlorazowej) {
             System.out.println(s.drukujStanyKlasAbstrakcji());
+        }
+        System.out.println("\nKlasy abstrakcji: ");
+        for (KlasaAbstrakcji ka : klasyAbstrakcji){
+            System.out.println(ka.toString());
         }
     }
 

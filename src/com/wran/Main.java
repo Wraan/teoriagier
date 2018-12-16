@@ -1,5 +1,6 @@
 package com.wran;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -7,12 +8,21 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner reader = new Scanner(System.in);
-        System.out.println("Wprowadz nazwe pliku z gra:");
-        String input = reader.nextLine();
-//        String nazwaGry = System.getProperty("user.dir") + "\\src\\com\\wran\\" + input + ".txt";
-        String nazwaGry = input += ".txt";
-        Gra gra = new Gra();
+        String input;
+        Gra gra;
+        String nazwaGry;
+        while (true){
+            System.out.println("Wprowadz nazwe pliku z gra:");
+            input = reader.nextLine();
+            nazwaGry = System.getProperty("user.dir") + "\\src\\com\\wran\\" + input + ".txt";
+//            nazwaGry = input + ".txt";
+
+            if(new File(nazwaGry).exists())
+                break;
+        }
+        gra = new Gra();
         gra.wczytajGreZPliku(nazwaGry);
+
         if(!gra.sprawdzGre()) {
             System.out.println("Wprowadzona gra jest nieprawidlowa");
             return;
