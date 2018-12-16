@@ -269,15 +269,11 @@ public class Gra {
         }
     }
 
-
-
-
-
     /*Metody obsługujące gry ilorazowe*/
     public void utworzGreIlorazowa(){
         System.out.println("Tworzenie gry ilorazowej");
         obliczMaxNumerStrategii();
-        System.out.println("Gra początkowa");
+        System.out.println("Gra poczatkowa");
         drukujGre();
         System.out.println("\n\n");
         porownajWszsytkieStrategieGraczaPierwszego();
@@ -506,7 +502,7 @@ public class Gra {
         }
 
         if(czyStrategieGraczaPierwszegoSaRownowazne() && czyStrategieGraczaDrugiegoSaRownowazne() && czyStrategieGraczaTrzeciegoSaRownowazne())
-            System.out.println("Gra jest d-rozwiązalna " + stopienDrozwiazania + " stopnia");
+            System.out.println("Gra jest d-rozwiazalna " + stopienDrozwiazania + " stopnia");
     }
     private int mpeszKrok(){
         //Jeżeli pojawi się strategia zdominowana wartość się zwiększy co spowoduje kolejne wykonanie się mPesz

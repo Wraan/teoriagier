@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="TeoraGier">
+    <output-path>$PROJECT_DIR$/out/artifacts/TeoraGier</output-path>
+    <root id="root">
+      <element id="archive" name="TeoriaGier.jar">
+        <element id="module-output" name="teoriagier" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
